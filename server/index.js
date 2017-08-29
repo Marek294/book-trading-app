@@ -1,8 +1,5 @@
 import express from 'express';
 import path from 'path';
-import webpack from 'webpack';
-import webpackMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 //import socket from 'socket.io';
@@ -17,15 +14,16 @@ import requests from './routes/requests';
 let app = express();
 let server = http.Server(app);
 
+var webpack;
+var webpackMiddleware;
+var webpackHotMiddleware;
 var webpackConfig;
 
-if(process.env.NODE_ENV = 'production') {
-    webpackConfig = require('../webpack.config.prod');
-    const compiler = webpack(webpackConfig);
+if(process.env.NODE_ENV.trim() === 'development') {
+    webpack = require('webpack');
+    webpackMiddleware = require('webpack-dev-middleware');
+    webpackHotMiddleware = require('webpack-hot-middleware');
 
-    app.use(webpackMiddleware(compiler));
-}
-else {
     webpackConfig = require('../webpack.config.dev');
     const compiler = webpack(webpackConfig);
 
@@ -36,8 +34,6 @@ else {
         noInfo: true
     }));
 }
-
-
 
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());

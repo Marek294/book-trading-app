@@ -8,18 +8,6 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _webpack = require('webpack');
-
-var _webpack2 = _interopRequireDefault(_webpack);
-
-var _webpackDevMiddleware = require('webpack-dev-middleware');
-
-var _webpackDevMiddleware2 = _interopRequireDefault(_webpackDevMiddleware);
-
-var _webpackHotMiddleware = require('webpack-hot-middleware');
-
-var _webpackHotMiddleware2 = _interopRequireDefault(_webpackHotMiddleware);
-
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
@@ -56,19 +44,21 @@ var app = (0, _express2.default)();
 
 var server = _http2.default.Server(app);
 
+var webpack;
+var webpackMiddleware;
+var webpackHotMiddleware;
 var webpackConfig;
 
-if (process.env.NODE_ENV = 'production') {
-    webpackConfig = require('../webpack.config.prod');
-    var compiler = (0, _webpack2.default)(webpackConfig);
+if (process.env.NODE_ENV.trim() === 'development') {
+    webpack = require('webpack');
+    webpackMiddleware = require('webpack-dev-middleware');
+    webpackHotMiddleware = require('webpack-hot-middleware');
 
-    app.use((0, _webpackDevMiddleware2.default)(compiler));
-} else {
     webpackConfig = require('../webpack.config.dev');
-    var _compiler = (0, _webpack2.default)(webpackConfig);
+    var compiler = webpack(webpackConfig);
 
-    app.use((0, _webpackDevMiddleware2.default)(_compiler));
-    app.use((0, _webpackHotMiddleware2.default)(_compiler, {
+    app.use(webpackMiddleware(compiler));
+    app.use(webpackHotMiddleware(compiler, {
         hot: true,
         publicPath: webpackConfig.output.publicPath,
         noInfo: true
