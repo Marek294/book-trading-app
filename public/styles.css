@@ -1,0 +1,57 @@
+.row.equal {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.col-xs-4 {
+    margin-bottom: 30px;
+}
+
+.thumbnail {
+    height: 100%;
+}
+
+.trade-margin {
+    margin-top: 10px;
+}
+
+.request-inf {
+    color: #C0C0C0;
+}
+
+.list-group-item p {
+
+}
+
+.fontSize {
+    margin-top: 10px;
+}
+
+.fontSize p {
+    font-size: 15px;
+    line-height: 5px;
+}
+
+.deleteIcon {
+    color: #E80000;
+    font-size: 30px;
+}
+
+.outIcon {
+    color: #2eb82e;
+    font-size: 30px;
+}
+
+.parent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

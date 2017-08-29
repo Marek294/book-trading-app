@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../server/models/request.js"],"names":["Model","extend","tableName"],"mappings":";;;;;;AAAA;;;;;;kBAEe,oBAAUA,KAAV,CAAgBC,MAAhB,CAAuB;AAClCC,eAAW;AADuB,CAAvB,C","file":"request.js","sourcesContent":["import bookshelf from '../bookshelf';\r\n\r\nexport default bookshelf.Model.extend({\r\n    tableName: 'requests'\r\n})"]}
