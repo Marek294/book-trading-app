@@ -18,17 +18,27 @@ let app = express();
 let server = http.Server(app);
 
 var webpackConfig;
-if(process.env.NODE_ENV = 'production') webpackConfig = require('../webpack.config.prod');
-else webpackConfig = require('../webpack.config.dev');
 
-const compiler = webpack(webpackConfig)
+if(process.env.NODE_ENV = 'production') {
+    webpackConfig = require('../webpack.config.prod');
+    const compiler = webpack(webpackConfig);
 
-app.use(webpackMiddleware(compiler));
-app.use(webpackHotMiddleware(compiler, {
-    hot: true,
-    publicPath: webpackConfig.output.publicPath,
-    noInfo: true
-}));
+    app.use(webpackMiddleware(compiler));
+}
+else {
+    webpackConfig = require('../webpack.config.dev');
+    const compiler = webpack(webpackConfig);
+
+    app.use(webpackMiddleware(compiler));
+    app.use(webpackHotMiddleware(compiler, {
+        hot: true,
+        publicPath: webpackConfig.output.publicPath,
+        noInfo: true
+    }));
+}
+
+
+
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(express.static('public'));

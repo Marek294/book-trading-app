@@ -3,6 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: [
+        'webpack-hot-middleware/client',
         path.join(__dirname, '/client/index.js')
     ],
     output: {
