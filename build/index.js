@@ -79,10 +79,10 @@ app.get('*', function (req, res) {
     res.sendFile(_path2.default.join(__dirname, '../public/index.html'));
 });
 
-var port = process.env.PORT || 3000;
+app.set('port', process.env.PORT || 3000);
 
-server.listen(port, function () {
-    console.log('Server listening at port ' + port);
+server.listen(app.get('port'), function () {
+    console.log('Server listening at port ' + app.get('port'));
 });
 
 // // Setup socket
